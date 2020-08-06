@@ -66,7 +66,7 @@ const students = [{
 
 }
 console.log(getSubjects(prompt('Write the name you are searching')));
-
+*/
 function getAverageMark(student){
 	student = student.toLowerCase();
 	let studentEach = '';
@@ -109,7 +109,7 @@ function getAverageMark(student){
 	
 
 }
-console.log(getAverageMark(prompt('Write the name of a stdent you want to get average mark')))
+/*console.log(getAverageMark(prompt('Write the name of a stdent you want to get average mark')))
 
 
 function getStudentInfo(student){
@@ -138,4 +138,41 @@ function getStudentInfo(student){
 
 }
 console.log(getStudentInfo(prompt('Enter the name of a studet you want to get information')));
+
+function getStudentsNames(student1, student2, student3){
+	let arr = [];
+	arr.push(student1);
+	arr.push(student2);
+	arr.push(student3);
+	let result = arr.sort()
+	return result;
+}
+console.log(getStudentsNames(students[0].name, students[1].name, students[2].name));
 */
+function getBestStudent(student1, student2, student3){
+let firstStudentMark = getAverageMark(students[0].name);
+let secondStudentMark = getAverageMark(students[1].name);
+let thirdStudentMark = getAverageMark(students[2].name);
+let marks = [];
+marks.push(firstStudentMark);
+marks.push(secondStudentMark);
+marks.push(thirdStudentMark);
+let marksSorted = marks.sort((a, b) =>{
+	if(a > b){
+		return -1;
+	}else if(a < b){
+		return 1;
+
+	}
+	return 0;
+})
+	if(marksSorted[0] === firstStudentMark){
+		return student1;
+	}else if(marksSorted[0] === secondStudentMark){
+		return student2;
+
+	}
+	return student3;
+
+}
+console.log(getBestStudent(students[0].name, students[1].name, students[2].name));
