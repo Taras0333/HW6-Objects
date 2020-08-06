@@ -28,8 +28,14 @@ const students = [{
     
   }
 }];
+const subjectsResult = [];
+let resultAverage = 0;
+let info = ''; 
+let names = [];
+let best = '';
+let object = {};
 
-/*function getSubjects(student){
+function getSubjects(student){
 	student = student.toLowerCase();
 	let studentEach = '';
 	if(student === students[0].name.toLowerCase()){
@@ -44,7 +50,6 @@ const students = [{
 	let arr = Object.entries(studentEach);
     	const subjectsCopy = [];
     	const capitalize = [];
-    	const result = [];
     	
     	for (i = 0; i <= arr.length - 1; i++){
     		subjectsCopy.push(arr[i][0]+ ': ');
@@ -58,15 +63,15 @@ const students = [{
     		capitalize.push(i.charAt(0).toUpperCase() + i.slice(1));
     	})
     	for (i = 0; i <= capitalize.length - 1; i++){
-    		result.push(capitalize[i] + arr[i][1]);
+    		subjectsResult.push(capitalize[i] + arr[i][1]);
     	}
     	
-    	return result;
+    	return subjectsResult;
 
 
 }
 console.log(getSubjects(prompt('Write the name you are searching')));
-*/
+
 function getAverageMark(student){
 	student = student.toLowerCase();
 	let studentEach = '';
@@ -89,7 +94,6 @@ function getAverageMark(student){
 	let arr = Object.entries(studentEach);
     const subjectsCopy = [];
     const capitalize = [];
-    let result = 0;
     	
     	for (i = 0; i <= arr[0][1].length - 1; i++){
     		marksTogether += arr[0][1][i];
@@ -103,13 +107,13 @@ function getAverageMark(student){
     		marksTogether += arr[2][1][i];
     		quontity += 1;
     	}
-    	result = (marksTogether / quontity).toFixed(2);
-    	 return result;
+    	resultAverage = (marksTogether / quontity).toFixed(2);
+    	 return resultAverage;
 
 	
 
 }
-/*console.log(getAverageMark(prompt('Write the name of a stdent you want to get average mark')))
+console.log(getAverageMark(prompt('Write the name of a student you want to get average mark')))
 
 
 function getStudentInfo(student){
@@ -131,8 +135,8 @@ function getStudentInfo(student){
 	const course = students[studentsNumber].course;
 	const name = students[studentsNumber].name;
 	const averageMark = getAverageMark(student);
-	const result = name + ' - ' + 'Course: ' + course + ',' + ' ' + 'Average mark: ' + averageMark;
-	return result;
+	info = name + ' - ' + 'Course: ' + course + ',' + ' ' + 'Average mark: ' + averageMark;
+	return info;
 
 
 
@@ -144,11 +148,11 @@ function getStudentsNames(student1, student2, student3){
 	arr.push(student1);
 	arr.push(student2);
 	arr.push(student3);
-	let result = arr.sort()
-	return result;
+	names = arr.sort()
+	return names;
 }
 console.log(getStudentsNames(students[0].name, students[1].name, students[2].name));
-*/
+
 function getBestStudent(student1, student2, student3){
 let firstStudentMark = getAverageMark(students[0].name);
 let secondStudentMark = getAverageMark(students[1].name);
@@ -167,12 +171,46 @@ let marksSorted = marks.sort((a, b) =>{
 	return 0;
 })
 	if(marksSorted[0] === firstStudentMark){
+		best = student1;
 		return student1;
 	}else if(marksSorted[0] === secondStudentMark){
+		best = student2
 		return student2;
 
 	}
+	best = student3;
 	return student3;
 
 }
 console.log(getBestStudent(students[0].name, students[1].name, students[2].name));
+
+function calculateWordLetters(word) {
+	
+	let split = word.split('').sort();
+	let count = 1;
+	let i = 1;	
+
+	while (i < split.length) {
+		if (split[i - 1] === split[i]) {
+			count+= 1;
+		} else {
+			object[split[i - 1]] = count;
+			count = 1;
+		}
+		i++;
+	}
+	object[split[i - 1]] = count;
+	return object;
+}
+console.log(calculateWordLetters(prompt('Write the word you want to calculate letters')));
+
+const container=document.querySelector("#container");
+container.innerHTML=`
+<p>Subjects for a student: ${subjectsResult};</p>
+<p> Average mark: ${resultAverage};</p>
+<p>Information: ${info};</p>
+<p>Students names: ${names};</p>
+<p>Best student: ${best};</p> 
+<p>Count of letters: ${object};</p>
+
+`;
