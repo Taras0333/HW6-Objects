@@ -1,5 +1,4 @@
 
-//debugger
 const students = [{
   name: "Tanya",
   course: 3,
@@ -58,7 +57,7 @@ function getSubjects(student){
     	
     	subjectsCopy.forEach(i =>{
     		if(i === 'data_science: '){
-    			i = 'data-science: ';
+    			i = 'data science: ';
     		}
     		capitalize.push(i.charAt(0).toUpperCase() + i.slice(1));
     	})
@@ -203,6 +202,7 @@ function calculateWordLetters(word) {
 	return object;
 }
 console.log(calculateWordLetters(prompt('Write the word you want to calculate letters')));
+
 
 const container=document.querySelector("#container");
 container.innerHTML=`
