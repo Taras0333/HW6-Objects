@@ -29,6 +29,7 @@ const students = [{
 }];
 const subjectsResult = [];
 let resultAverage = 0;
+let resultAverageInfo = 0;
 let info = ''; 
 let names = [];
 let best = '';
@@ -71,7 +72,8 @@ function getSubjects(student){
 }
 console.log(getSubjects(prompt('Write the name you are searching')));
 
-function getAverageMark(student){
+
+function getAverageMark(student, studentInfo){
 	student = student.toLowerCase();
 	let studentEach = '';
 	let studentsNumber = 0;
@@ -106,26 +108,33 @@ function getAverageMark(student){
     		marksTogether += arr[2][1][i];
     		quontity += 1;
     	}
+		if(studentInfo === 0){
+    		resultAverageInfo = (marksTogether / quontity).toFixed(2);
+    	 return resultAverageInfo;
+    	}
+
     	resultAverage = (marksTogether / quontity).toFixed(2);
     	 return resultAverage;
+    	
 
 	
 
 }
-console.log(getAverageMark(prompt('Write the name of a student you want to get average mark')))
+console.log(getAverageMark(prompt('Write the name of a student you want to get average mark')));
 
 
-function getStudentInfo(student){
-	student = student.toLowerCase();
+
+function getStudentInfo(studentInfo){
+	studentInfo = studentInfo.toLowerCase();
 	let studentEach = '';
 	let studentsNumber = 0;
-	if(student === students[0].name.toLowerCase()){
+	if(studentInfo === students[0].name.toLowerCase()){
 		studentEach = students[0].subjects;
 		studentsNumber = 0;
-	} else if(student === students[1].name.toLowerCase()){
+	} else if(studentInfo === students[1].name.toLowerCase()){
 		studentEach = students[1].subjects;
 		studentsNumber = 1; 
-	}else if(student === students[2].name.toLowerCase()){
+	}else if(studentInfo === students[2].name.toLowerCase()){
 		studentEach = students[2].subjects;
 		studentsNumber = 2;
 	}else{
@@ -133,7 +142,7 @@ function getStudentInfo(student){
 	}
 	const course = students[studentsNumber].course;
 	const name = students[studentsNumber].name;
-	const averageMark = getAverageMark(student);
+	const averageMark = getAverageMark(studentInfo, 0);
 	info = name + ' - ' + 'Course: ' + course + ',' + ' ' + 'Average mark: ' + averageMark;
 	return info;
 
@@ -153,9 +162,9 @@ function getStudentsNames(student1, student2, student3){
 console.log(getStudentsNames(students[0].name, students[1].name, students[2].name));
 
 function getBestStudent(student1, student2, student3){
-let firstStudentMark = getAverageMark(students[0].name);
-let secondStudentMark = getAverageMark(students[1].name);
-let thirdStudentMark = getAverageMark(students[2].name);
+let firstStudentMark = getAverageMark(students[0].name, 0);
+let secondStudentMark = getAverageMark(students[1].name, 0);
+let thirdStudentMark = getAverageMark(students[2].name, 0);
 let marks = [];
 marks.push(firstStudentMark);
 marks.push(secondStudentMark);
@@ -202,7 +211,6 @@ function calculateWordLetters(word) {
 	return object;
 }
 console.log(calculateWordLetters(prompt('Write the word you want to calculate letters')));
-
 
 const container=document.querySelector("#container");
 container.innerHTML=`
