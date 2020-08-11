@@ -34,19 +34,28 @@ let info = '';
 let names = [];
 let best = '';
 let object = {};
+let studentsArray = [];
+function getStudentArr(){
+
+
+for(let i = 0; i <= students.length - 1; i++){
+	studentsArray.push(students[i].name.toLowerCase());
+}
+}
+getStudentArr();
+
+
+
 
 function getSubjects(student){
-	student = student.toLowerCase();
+	student === student.toLowerCase();
 	let studentEach = '';
-	if(student === students[0].name.toLowerCase()){
-		studentEach = students[0].subjects;
-	} else if(student === students[1].name.toLowerCase()){
-		studentEach = students[1].subjects;
-	}else if(student === students[2].name.toLowerCase()){
-		studentEach = students[2].subjects;
-	}else{
-		alert('There is no students under this name');
-	}
+	studentsArray.find((el, index, originalArr) =>{
+		if(student === el){
+			studentEach = students[index].subjects;
+		}
+	})
+	console.log(studentEach);
 	let arr = Object.entries(studentEach);
     	const subjectsCopy = [];
     	const capitalize = [];
@@ -66,29 +75,21 @@ function getSubjects(student){
     		subjectsResult.push(capitalize[i] + arr[i][1]);
     	}
     	
+    	
     	return subjectsResult;
 
 
 }
 console.log(getSubjects(prompt('Write the name you are searching')));
-
-
 function getAverageMark(student, studentInfo){
 	student = student.toLowerCase();
 	let studentEach = '';
 	let studentsNumber = 0;
-	if(student === students[0].name.toLowerCase()){
-		studentEach = students[0].subjects;
-		studentsNumber = 0;
-	} else if(student === students[1].name.toLowerCase()){
-		studentEach = students[1].subjects;
-		studentsNumber = 1; 
-	}else if(student === students[2].name.toLowerCase()){
-		studentEach = students[2].subjects;
-		studentsNumber = 2;
-	}else{
-		alert('There is no students under this name');
-	}
+	studentsArray.find((el, index, originalArr) =>{
+		if(student === el){
+			studentEach = students[index].subjects;
+		}
+	})
 	let marksTogether = 0;
 	let quontity = 0;
 	let firstSubjectAv = 0;
@@ -110,6 +111,7 @@ function getAverageMark(student, studentInfo){
     	}
 		if(studentInfo === 0){
     		resultAverageInfo = (marksTogether / quontity).toFixed(2);
+    		
     	 return resultAverageInfo;
     	}
 
@@ -128,18 +130,13 @@ function getStudentInfo(studentInfo){
 	studentInfo = studentInfo.toLowerCase();
 	let studentEach = '';
 	let studentsNumber = 0;
-	if(studentInfo === students[0].name.toLowerCase()){
-		studentEach = students[0].subjects;
-		studentsNumber = 0;
-	} else if(studentInfo === students[1].name.toLowerCase()){
-		studentEach = students[1].subjects;
-		studentsNumber = 1; 
-	}else if(studentInfo === students[2].name.toLowerCase()){
-		studentEach = students[2].subjects;
-		studentsNumber = 2;
-	}else{
-		alert('There is no students under this name');
-	}
+	studentsArray.find((el, index, originalArr) =>{
+		if(studentInfo === el){
+			studentEach = students[index].subjects;
+			studentsNumber = index;
+		}
+	})
+	console.log(studentEach);
 	const course = students[studentsNumber].course;
 	const name = students[studentsNumber].name;
 	const averageMark = getAverageMark(studentInfo, 0);
