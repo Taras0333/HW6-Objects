@@ -27,64 +27,51 @@ const students = [{
     
   }
 }];
-const subjectsResult = [];
-let resultAverage = 0;
-let resultAverageInfo = 0;
-let info = ''; 
-let names = [];
-let best = '';
-let object = {};
 let studentsArray = [];
 function getStudentArr(){
 
 
 for(let i = 0; i <= students.length - 1; i++){
 	studentsArray.push(students[i].name.toLowerCase());
+
 }
 }
 getStudentArr();
-
-
-
-
 function getSubjects(student){
-	student === student.toLowerCase();
+	const subjectsResult = [];
+	student = student.toLowerCase();
 	let studentEach = '';
 	studentsArray.find((el, index, originalArr) =>{
 		if(student === el){
 			studentEach = students[index].subjects;
 		}
 	})
-	console.log(studentEach);
 	let arr = Object.entries(studentEach);
     	const subjectsCopy = [];
     	const capitalize = [];
     	
-    	for (i = 0; i <= arr.length - 1; i++){
+    	for (let i = 0; i <= arr.length - 1; i++){
     		subjectsCopy.push(arr[i][0]+ ': ');
     	}
-
-    	
     	subjectsCopy.forEach(i =>{
     		if(i === 'data_science: '){
     			i = 'data science: ';
     		}
     		capitalize.push(i.charAt(0).toUpperCase() + i.slice(1));
     	})
-    	for (i = 0; i <= capitalize.length - 1; i++){
+    	for (let i = 0; i <= capitalize.length - 1; i++){
     		subjectsResult.push(capitalize[i] + arr[i][1]);
     	}
-    	
-    	
-    	return subjectsResult;
+
+	return subjectsResult;
 
 
 }
-console.log(getSubjects(prompt('Write the name you are searching')));
 function getAverageMark(student, studentInfo){
+	let resultAverage = 0;
+	let resultAverageInfo = 0;
 	student = student.toLowerCase();
 	let studentEach = '';
-	let studentsNumber = 0;
 	studentsArray.find((el, index, originalArr) =>{
 		if(student === el){
 			studentEach = students[index].subjects;
@@ -92,20 +79,17 @@ function getAverageMark(student, studentInfo){
 	})
 	let marksTogether = 0;
 	let quontity = 0;
-	let firstSubjectAv = 0;
 	let arr = Object.entries(studentEach);
-    const subjectsCopy = [];
-    const capitalize = [];
-    	
-    	for (i = 0; i <= arr[0][1].length - 1; i++){
+
+	for (let i = 0; i <= arr[0][1].length - 1; i++){
     		marksTogether += arr[0][1][i];
     		quontity += 1;
     	}
-    	for (i = 0; i <= arr[1][1].length - 1; i++){
+    	for (let i = 0; i <= arr[1][1].length - 1; i++){
     		marksTogether += arr[1][1][i];
     		quontity += 1;
     	}
-    	for (i = 0; i <= arr[2][1].length - 1; i++){
+    	for (let i = 0; i <= arr[2][1].length - 1; i++){
     		marksTogether += arr[2][1][i];
     		quontity += 1;
     	}
@@ -117,16 +101,9 @@ function getAverageMark(student, studentInfo){
 
     	resultAverage = (marksTogether / quontity).toFixed(2);
     	 return resultAverage;
-    	
-
-	
-
 }
-console.log(getAverageMark(prompt('Write the name of a student you want to get average mark')));
-
-
-
 function getStudentInfo(studentInfo){
+	let info = '';
 	studentInfo = studentInfo.toLowerCase();
 	let studentEach = '';
 	let studentsNumber = 0;
@@ -136,7 +113,6 @@ function getStudentInfo(studentInfo){
 			studentsNumber = index;
 		}
 	})
-	console.log(studentEach);
 	const course = students[studentsNumber].course;
 	const name = students[studentsNumber].name;
 	const averageMark = getAverageMark(studentInfo, 0);
@@ -146,9 +122,8 @@ function getStudentInfo(studentInfo){
 
 
 }
-console.log(getStudentInfo(prompt('Enter the name of a studet you want to get information')));
-
 function getStudentsNames(student1, student2, student3){
+	let names = [];
 	let arr = [];
 	arr.push(student1);
 	arr.push(student2);
@@ -156,9 +131,8 @@ function getStudentsNames(student1, student2, student3){
 	names = arr.sort()
 	return names;
 }
-console.log(getStudentsNames(students[0].name, students[1].name, students[2].name));
-
 function getBestStudent(student1, student2, student3){
+	let best = [];
 let firstStudentMark = getAverageMark(students[0].name, 0);
 let secondStudentMark = getAverageMark(students[1].name, 0);
 let thirdStudentMark = getAverageMark(students[2].name, 0);
@@ -175,6 +149,7 @@ let marksSorted = marks.sort((a, b) =>{
 	}
 	return 0;
 })
+
 	if(marksSorted[0] === firstStudentMark){
 		best = student1;
 		return student1;
@@ -187,10 +162,8 @@ let marksSorted = marks.sort((a, b) =>{
 	return student3;
 
 }
-console.log(getBestStudent(students[0].name, students[1].name, students[2].name));
-
 function calculateWordLetters(word) {
-	
+	let object = {};
 	let split = word.split('').sort();
 	let count = 1;
 	let i = 1;	
@@ -205,17 +178,16 @@ function calculateWordLetters(word) {
 		i++;
 	}
 	object[split[i - 1]] = count;
+	console.log(object);
 	return object;
 }
-console.log(calculateWordLetters(prompt('Write the word you want to calculate letters')));
-
 const container=document.querySelector("#container");
 container.innerHTML=`
-<p>Subjects for a student: ${subjectsResult};</p>
-<p> Average mark: ${resultAverage};</p>
-<p>Information: ${info};</p>
-<p>Students names: ${names};</p>
-<p>Best student: ${best};</p> 
-<p>Count of letters: ${object};</p>
+<p>Subjects for a student: ${getSubjects(prompt('Write the name you are searching'))};</p>
+<p> Average mark: ${getAverageMark(prompt('Write the name of a student you want to get average mark'))};</p>
+<p>Information: ${getStudentInfo(prompt('Enter the name of a studet you want to get information'))};</p>
+<p>Students names: ${getStudentsNames(students[0].name, students[1].name, students[2].name)};</p>
+<p>Best student: ${getBestStudent(students[0].name, students[1].name, students[2].name)};</p> 
+<p>Count of letters: ${calculateWordLetters(prompt('Write the word you want to calculate letters'))};</p>
 
 `;
