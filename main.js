@@ -27,21 +27,24 @@ const students = [{
     
   }
 }];
-let studentsArray = [];
+
 function getStudentArr(){
+	let studentsArray = [];
 
 
 for(let i = 0; i <= students.length - 1; i++){
 	studentsArray.push(students[i].name.toLowerCase());
 
 }
+
+return studentsArray;
 }
-getStudentArr();
+
 function getSubjects(student){
 	const subjectsResult = [];
 	student = student.toLowerCase();
 	let studentEach = '';
-	studentsArray.find((el, index, originalArr) =>{
+	getStudentArr().find((el, index, originalArr) =>{
 		if(student === el){
 			studentEach = students[index].subjects;
 		}
@@ -62,7 +65,6 @@ function getSubjects(student){
     	for (let i = 0; i <= capitalize.length - 1; i++){
     		subjectsResult.push(capitalize[i] + arr[i][1]);
     	}
-
 	return subjectsResult;
 
 
@@ -72,7 +74,7 @@ function getAverageMark(student, studentInfo){
 	let resultAverageInfo = 0;
 	student = student.toLowerCase();
 	let studentEach = '';
-	studentsArray.find((el, index, originalArr) =>{
+	getStudentArr().find((el, index, originalArr) =>{
 		if(student === el){
 			studentEach = students[index].subjects;
 		}
@@ -95,19 +97,18 @@ function getAverageMark(student, studentInfo){
     	}
 		if(studentInfo === 0){
     		resultAverageInfo = (marksTogether / quontity).toFixed(2);
-    		
-    	 return resultAverageInfo;
+			return resultAverageInfo;
     	}
 
     	resultAverage = (marksTogether / quontity).toFixed(2);
-    	 return resultAverage;
+	return resultAverage;
 }
 function getStudentInfo(studentInfo){
 	let info = '';
 	studentInfo = studentInfo.toLowerCase();
 	let studentEach = '';
 	let studentsNumber = 0;
-	studentsArray.find((el, index, originalArr) =>{
+	getStudentArr().find((el, index, originalArr) =>{
 		if(studentInfo === el){
 			studentEach = students[index].subjects;
 			studentsNumber = index;
